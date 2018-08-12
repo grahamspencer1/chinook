@@ -29,27 +29,37 @@ $ Track.where(genre_id: Genre.where(name: "Hip Hop/Rap")).count
 __________________________________________________________________________
 5. Find the total amount of time required to listen to all the tracks in the database.
 
-$
+$ Track.sum(:milliseconds)/1000/60/60
 
-=>
+=> 382 (NOTE: Converted to hours for easy reading)
 __________________________________________________________________________
 6. Find the highest price of any track that has the media type "MPEG audio file".
 
-=>
+$ Track.where(media_type_id: MediaType.where(name: "MPEG audio file")).maximum(:unit_price)
+
+=> 0.99e0
 __________________________________________________________________________
 7. Find the name of the most expensive track that has the media type "MPEG audio file".
 
-=>
+$ Track.where(unit_price: 0.99e0, media_type_id: MediaType.where(name: "MPEG audio file"))
+
+=> #<ActiveRecord::Relation [#<Track id: 6, album_id: 1, genre_id: 1, media_type_id: 1, name: "Put The Finger On You", composer: "Angus Young, Malcolm Young, Brian Johnson", milliseconds: 205662, bytes: 6713451, unit_price: 0.99e0, created_at: "2005-01-03 05:49:26", updated_at: "2014-01-29 22:14:56"> ...]>
 __________________________________________________________________________
 8. Find the 2 oldest artists.
 
-=>
+$ Artist.order(created_at: :asc).limit(2)
+
+=> #<ActiveRecord::Relation [#<Artist id: 258, name: "Les Arts Florissants & William Christie", created_at: "2004-02-13 06:08:36", updated_at: "2014-01-29 22:10:22">, #<Artist id: 31, name: "Baby Consuelo", created_at: "2004-02-16 22:04:39", updated_at: "2014-01-29 22:10:22">]>
 __________________________________________________________________________
 9. Find the least expensive track that has the genre "Electronica/Dance".
 
-=>
+$ Track.where(genre_id: Genre.where(name: "Electronica/Dance")).order(unit_price: :desc).limit(1)
+
+=> #<ActiveRecord::Relation [#<Track id: 3319, album_id: 259, genre_id: 15, media_type_id: 1, name: "Instinto Colectivo", composer: nil, milliseconds: 300564, bytes: 12024875, unit_price: 0.99e0, created_at: "2004-09-27 22:40:29", updated_at: "2014-01-29 22:15:04">]>
 
 __________________________________________________________________________
-10. Find all "MPEG autio file" tracks in the genre "Electronica/Dance".
+10. Find all "MPEG audio file" tracks in the genre "Electronica/Dance".
 
-=>
+$ Track.where(genre_id: Genre.where(name: "Electronica/Dance")).where(media_type_id: MediaType.where(name: "MPEG audio file"))
+
+=> => #<ActiveRecord::Relation [#<Track id: 3319, album_id: 259, genre_id: 15, media_type_id: 1, name: "Instinto Colectivo", composer: nil, milliseconds: 300564, bytes: 12024875, unit_price: 0.99e0, created_at: "2004-09-27 22:40:29", updated_at: "2014-01-29 22:15:04"> ...]>
