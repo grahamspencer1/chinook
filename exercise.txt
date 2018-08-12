@@ -1,0 +1,55 @@
+1. Find the albums recorded by the artist Queen.
+
+$ Artist.where(name: 'Queen')
+
+=> #<ActiveRecord::Relation [#<Artist id: 51, name: "Queen", created_at: "2006-01-08 22:57:01", updated_at: "2014-01-29 22:10:22">]>
+
+$ Album.where(artist_id: 51)
+
+=> #<ActiveRecord::Relation [#<Album id: 36, artist_id: 51, title: "Greatest Hits II", created_at: "2008-01-30 14:00:12", updated_at: "2014-01-29 22:14:02">, #<Album id: 185, artist_id: 51, title: "Greatest Hits I", created_at: "2007-12-29 12:02:13", updated_at: "2014-01-29 22:14:02">, #<Album id: 186, artist_id: 51, title: "News Of The World", created_at: "2010-06-23 20:50:06", updated_at: "2014-01-29 22:14:02">]>
+
+__________________________________________________________________________
+2. Count how many tracks belong to the media type "Protected MPEG-4 video file".
+
+$ Track.where(media_type_id: MediaType.where(name: 'Protected MPEG-4 video file')).count
+
+=> 214
+__________________________________________________________________________
+3. Find the genre with the name "Hip Hop/Rap".
+
+$ Genre.find_by(name: "Hip Hop/Rap")
+
+=> #<Genre id: 17, name: "Hip Hop/Rap", created_at: "2013-01-20 02:04:31", updated_at: "2014-01-29 22:14:08">
+__________________________________________________________________________
+4. Count how many tracks belong to the "Hip Hop/Rap" genre
+
+$ Track.where(genre_id: Genre.where(name: "Hip Hop/Rap")).count
+
+=> 35
+__________________________________________________________________________
+5. Find the total amount of time required to listen to all the tracks in the database.
+
+$
+
+=>
+__________________________________________________________________________
+6. Find the highest price of any track that has the media type "MPEG audio file".
+
+=>
+__________________________________________________________________________
+7. Find the name of the most expensive track that has the media type "MPEG audio file".
+
+=>
+__________________________________________________________________________
+8. Find the 2 oldest artists.
+
+=>
+__________________________________________________________________________
+9. Find the least expensive track that has the genre "Electronica/Dance".
+
+=>
+
+__________________________________________________________________________
+10. Find all "MPEG autio file" tracks in the genre "Electronica/Dance".
+
+=>
